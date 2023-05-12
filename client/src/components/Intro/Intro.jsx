@@ -14,6 +14,8 @@ import { themeContext } from "../../Context";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
 import { useState } from "react";
+
+
 const Intro = () => {
   // Transition
   const transition = { duration: 2, type: "spring" };
@@ -24,6 +26,8 @@ const Intro = () => {
 
   const [modal, setModal] = useState(false);
   const [lesson, setLesson] = useState("");
+  const [classes, setClasses] = useState([]);
+  const [feedback, setFeedback] = useState("");
 
   const toggleModal = () => {
     setModal(!modal);
@@ -33,6 +37,11 @@ const Intro = () => {
     document.body.classList.add('active-modal')
   } else {
     document.body.classList.remove('active-modal')
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(feedback);
   }
 
   return (
@@ -55,10 +64,18 @@ const Intro = () => {
               <h2>(name of today's class/lesson)</h2>
               <p>(date: 2/2/23)</p>
               <p>(today's class: ex. oil painting)</p>
-              <input></input>
-              <button className="close-modal" onClick={toggleModal}>
-                CLOSE
-              </button>
+              <div className="input-text">
+                Write your feedback!
+              </div>
+              <form id="modal-form" onSubmit={handleSubmit}>
+                <div className="modal-container">
+                  <textarea id="modal-feedback" onChange={e => setFeedback(e.target.value)}></textarea>
+                </div>
+                <button className="close-modal" onClick={toggleModal}>
+                  CLOSE
+                </button>
+                <button id="modal-submit">Submit</button>
+              </form>
             </div>
           </div>
         )}
