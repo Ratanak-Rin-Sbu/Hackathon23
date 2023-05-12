@@ -30,12 +30,14 @@ router.post("/register", async (req, res) => {
   await user.save();
   res.status(201).json({ message: "User registered Successfully" });
 });
+
 router.post("/login", async (req, res) => {
   console.log(req.body);
+  //get all form data
   const { email, password } = req.body;
-
+  // check if user exists, has valid credentials
   const user = await User.findOne({ email });
-
+  //if the user does not exists
   if (!user) {
     res.status(406).json({ message: "User does not exist, register first" });
     return;
@@ -45,6 +47,7 @@ router.post("/login", async (req, res) => {
     res.status(406).json({ message: "Credential not found" });
     return;
   }
+  //If the user credentials are correct, create a jwt token for user session info
 
   const data = { userId: user._id, username: user.username };
   const token = jwt.sign(data, JWT_SECRET);
