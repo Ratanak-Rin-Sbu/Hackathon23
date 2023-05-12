@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const User = require("../model /User");
+const User = require("../model/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = "jwt secret string";
@@ -12,19 +12,15 @@ router.get("/", (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-  //get all form data
   const { name, email, password, gender } = req.body;
-  // check if user exists, has valid credentials
   const checkUser = await User.findOne({ email });
   if (checkUser) {
     res.status(406).json({ message: "User with email already exists" });
     return;
   }
-  // hash password
   const saltRounds = 10;
   const salt = await bcrypt.genSaltSync(saltRounds);
   const hashedPassword = await bcrypt.hashSync(password, salt);
-  // store user
   const user = new User({
     email,
     name,
@@ -36,11 +32,10 @@ router.post("/register", async (req, res) => {
 });
 router.post("/login", async (req, res) => {
   console.log(req.body);
-  //get all form data
   const { email, password } = req.body;
-  // check if user exists, has valid credentials
+
   const user = await User.findOne({ email });
-  //if the user does not exists
+
   if (!user) {
     res.status(406).json({ message: "User does not exist, register first" });
     return;
@@ -50,7 +45,6 @@ router.post("/login", async (req, res) => {
     res.status(406).json({ message: "Credential not found" });
     return;
   }
-  //If the user credentials are correct, create a jwt token for user session info
 
   const data = { userId: user._id, username: user.username };
   const token = jwt.sign(data, JWT_SECRET);
@@ -63,7 +57,6 @@ router.get(
   passport.authenticate("jwt", { session: false }),
 
   (req, res) => {
-    // console.log("Current user is", req.user);
     res.json(req.user);
   }
 );
