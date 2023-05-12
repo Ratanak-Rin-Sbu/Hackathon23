@@ -21,7 +21,7 @@ router.get(
     const user = await User.findById(req.user._id);
     const classes = user.classes;
     console.log(classes);
-    res.send({ classes });
+    res.json(classes);
   })
 );
 

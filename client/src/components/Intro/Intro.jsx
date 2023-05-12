@@ -14,7 +14,8 @@ import { themeContext } from "../../Context";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Portfolio from "components/Portfolio/Portfolio";
-
+import { Typography, Modal, Box } from "@mui/material";
+import FlexBetween from "components/FlexBetween";
 
 const Intro = () => {
   // Transition
@@ -33,7 +34,7 @@ const Intro = () => {
 
   const navigate = useNavigate();
 
-  const onChange = date => {
+  const onChange = (date) => {
     setDate(date);
   };
 
@@ -43,32 +44,33 @@ const Intro = () => {
 
   const toggleModal2 = () => {
     setModel2(!modal2);
-  }
+  };
 
   if (modal) {
-    document.body.classList.add('active-modal')
+    document.body.classList.add("active-modal");
   } else {
-    document.body.classList.remove('active-modal')
+    document.body.classList.remove("active-modal");
   }
 
   if (modal2) {
-    document.body.classList.add('active-modal2')
+    document.body.classList.add("active-modal2");
   } else {
-    document.body.classList.remove('active-modal2')
+    document.body.classList.remove("active-modal2");
   }
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(feedback);
-  }
+  };
 
   return (
     <>
       <div className="Intro" id="Intro">
         <div className="i-left">
           <div className="i-name">
-            <span style={{ color: darkMode ? "white" : "" }}>Today's Popup</span>
+            <span style={{ color: darkMode ? "white" : "" }}>
+              Today's Popup
+            </span>
           </div>
           {/* <Link to="contact" smooth={true} spy={true}>
             <button className="button i-button">Review</button>
@@ -80,11 +82,14 @@ const Intro = () => {
             <button onClick={toggleModal2} className="button i-button">
               My notes
             </button>
-            <a href="https://forms.gle/8byKgwRBMM8oaKdGA" target="_blank">
+            <a
+              href="https://forms.gle/8byKgwRBMM8oaKdGA"
+              target="_blank"
+              rel="noreferrer"
+            >
               <button className="button i-button">Find interests</button>
             </a>
           </div>
-
 
           {modal && (
             <div className="modal">
@@ -93,12 +98,13 @@ const Intro = () => {
                 <h2>(name of today's class/lesson)</h2>
                 <p>(date: 2/2/23)</p>
                 <p>(today's class: ex. oil painting)</p>
-                <div className="input-text">
-                  Write your feedback!
-                </div>
+                <div className="input-text">Write your feedback!</div>
                 <form id="modal-form" onSubmit={handleSubmit}>
                   <div className="modal-container">
-                    <textarea id="modal-feedback" onChange={e => setFeedback(e.target.value)}></textarea>
+                    <textarea
+                      id="modal-feedback"
+                      onChange={(e) => setFeedback(e.target.value)}
+                    ></textarea>
                   </div>
                   <button className="close-modal" onClick={toggleModal}>
                     CLOSE
@@ -130,7 +136,7 @@ const Intro = () => {
         </div> */}
       </div>
 
-      <Portfolio/>
+      <Portfolio />
     </>
   );
 };
