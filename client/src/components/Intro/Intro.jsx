@@ -81,7 +81,7 @@ const Intro = () => {
               My notes
             </button>
             <a href="https://forms.gle/8byKgwRBMM8oaKdGA" target="_blank">
-              <button className="button i-button">Add</button>
+              <button className="button i-button">Find interests</button>
             </a>
           </div>
 
