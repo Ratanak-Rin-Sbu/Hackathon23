@@ -1,9 +1,9 @@
-import { ThemeProvider } from './Context';
+import { ThemeProvider } from "./Context";
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './App.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./App.css";
+import App from "./App";
 import authReducer from "./state";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
@@ -15,7 +15,7 @@ import {
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER
+  REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
@@ -32,7 +32,7 @@ const store = configureStore({
     }),
 });
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
