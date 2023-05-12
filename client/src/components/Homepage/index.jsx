@@ -25,6 +25,7 @@ const HomePage = () => {
     >
       <Navbar />
       <Intro />
+      <Portfolio />
       <Contact />
       <Footer />
     </div>

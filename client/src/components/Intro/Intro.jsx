@@ -14,7 +14,6 @@ import { themeContext } from "../../Context";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
 import { useState } from "react";
-import Calendar from "react-calendar";
 
 
 
