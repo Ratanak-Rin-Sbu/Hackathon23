@@ -2,19 +2,20 @@ import React, { useContext } from "react";
 import "./Portfolio.css";
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css";
-import Sidebar from "../../img/sidebar.png";
-import Ecommerce from "../../img/ecommerce.png";
-import HOC from "../../img/hoc.png";
-import MusicApp from "../../img/musicapp.png";
+import WebDev from "../../img/webdev.jpg";
+import Stock from "../../img/stock.jpg";
+import Calculus from "../../img/calculus.png";
+import Music from "../../img/music.jpg";
 import { themeContext } from "../../Context";
+import { Typography } from "@mui/material";
 const Portfolio = () => {
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
   return (
     <div className="portfolio" id="portfolio">
       {/* heading */}
-      <span style={{color: darkMode?'white': ''}}>Recent Projects</span>
-      <span>Portfolio</span>
+      <span style={{color: darkMode?'white': ''}}>Find your interests</span>
+      <span>We will help you find or create your own interests</span>
 
       {/* slider */}
       <Swiper
@@ -24,18 +25,26 @@ const Portfolio = () => {
         className="portfolio-slider"
       >
         <SwiperSlide>
-          <img src={Sidebar} alt="" />
+          <img src={WebDev} alt="" />
+          <Typography>Web development</Typography>
         </SwiperSlide>
         <SwiperSlide>
-          <img src={Ecommerce} alt="" />
+          <img src={Stock} alt="" />
+          <Typography>Stock Investment</Typography>
         </SwiperSlide>
         <SwiperSlide>
-          <img src={MusicApp} alt="" />
+          <img src={Music} alt="" />
+          <Typography>Musics</Typography>
         </SwiperSlide>
         <SwiperSlide>
-          <img src={HOC} alt="" />
+          <img src={Calculus} alt="" />
+          <Typography>Calculus</Typography>
         </SwiperSlide>
       </Swiper>
+
+      <a href="https://forms.gle/8byKgwRBMM8oaKdGA" target="_blank">
+        <button className="button i-buttonn">Let us know your interests</button>
+      </a>
     </div>
   );
 };
