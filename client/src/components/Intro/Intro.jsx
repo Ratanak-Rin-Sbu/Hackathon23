@@ -17,6 +17,7 @@ import { useState } from "react";
 
 
 
+
 const Intro = () => {
   // Transition
   const transition = { duration: 2, type: "spring" };
