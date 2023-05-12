@@ -19,6 +19,9 @@ body,
   padding: 0.5rem 3.5rem;
   overflow: hidden;
   color: var(--black);
+  height: 100%;
+  width: 100%;
+  font-family: "Rubik", sans-serif;
 }
 
 .button {

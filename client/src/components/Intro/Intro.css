@@ -2,7 +2,7 @@
   display: flex;
   display: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 /* left side styling */
@@ -10,7 +10,8 @@
   display: flex;
   position: relative;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
+  /* height: 100vh; */
 }
 
 .i-name {
@@ -18,6 +19,8 @@
   justify-content: center;
   align-items: center;
   gap: 0.25rem;
+  font-family: "Rubik", sans-serif;
+  /* margin-bottom: 30px; */
 }
 
 .i-name> :nth-child(1) {
@@ -189,8 +192,8 @@
 @media screen and (max-width: 480px) {
   .Intro {
     flex-direction: column;
-    gap: 7rem;
-    height: 64rem;
+    gap: 1rem;
+    /* height: 90vh; */
   }
 
   .i-right {
@@ -206,5 +209,10 @@
     /* display: none; */
     top: -7rem !important;
     ;
+  }
+
+  .i-button {
+    margin-right: 100px;
+    margin-bottom: 20px;
   }
 }

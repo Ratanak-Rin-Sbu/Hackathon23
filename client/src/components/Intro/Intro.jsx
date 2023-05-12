@@ -13,6 +13,7 @@ import Instagram from "../../img/instagram.png";
 import { themeContext } from "../../Context";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Portfolio from "components/Portfolio/Portfolio";
 
 
 const Intro = () => {
@@ -63,71 +64,74 @@ const Intro = () => {
   }
 
   return (
-    <div className="Intro" id="Intro">
-      <div className="i-left">
-        <div className="i-name">
-          <span style={{ color: darkMode ? "white" : "" }}>Today's Popup</span>
-        </div>
-        {/* <Link to="contact" smooth={true} spy={true}>
-          <button className="button i-button">Review</button>
-        </Link> */}
-        <div className="modals">
-          <button onClick={toggleModal} className="button i-button">
-            Review
-          </button>
-          <button onClick={toggleModal2} className="button i-button">
-            My notes
-          </button>
-          <a href="https://forms.gle/8byKgwRBMM8oaKdGA" target="_blank">
-            <button className="button i-button">Add</button>
-          </a>
-        </div>
+    <>
+      <div className="Intro" id="Intro">
+        <div className="i-left">
+          <div className="i-name">
+            <span style={{ color: darkMode ? "white" : "" }}>Today's Popup</span>
+          </div>
+          {/* <Link to="contact" smooth={true} spy={true}>
+            <button className="button i-button">Review</button>
+          </Link> */}
+          <div className="modals">
+            <button onClick={toggleModal} className="button i-button">
+              Review
+            </button>
+            <button onClick={toggleModal2} className="button i-button">
+              My notes
+            </button>
+            <a href="https://forms.gle/8byKgwRBMM8oaKdGA" target="_blank">
+              <button className="button i-button">Add</button>
+            </a>
+          </div>
 
 
-        {modal && (
-          <div className="modal">
-            <div onClick={toggleModal} className="overlay"></div>
-            <div className="modal-content">
-              <h2>(name of today's class/lesson)</h2>
-              <p>(date: 2/2/23)</p>
-              <p>(today's class: ex. oil painting)</p>
-              <div className="input-text">
-                Write your feedback!
-              </div>
-              <form id="modal-form" onSubmit={handleSubmit}>
-                <div className="modal-container">
-                  <textarea id="modal-feedback" onChange={e => setFeedback(e.target.value)}></textarea>
+          {modal && (
+            <div className="modal">
+              <div onClick={toggleModal} className="overlay"></div>
+              <div className="modal-content">
+                <h2>(name of today's class/lesson)</h2>
+                <p>(date: 2/2/23)</p>
+                <p>(today's class: ex. oil painting)</p>
+                <div className="input-text">
+                  Write your feedback!
                 </div>
-                <button className="close-modal" onClick={toggleModal}>
-                  CLOSE
-                </button>
-                <button id="modal-submit">Submit</button>
-              </form>
+                <form id="modal-form" onSubmit={handleSubmit}>
+                  <div className="modal-container">
+                    <textarea id="modal-feedback" onChange={e => setFeedback(e.target.value)}></textarea>
+                  </div>
+                  <button className="close-modal" onClick={toggleModal}>
+                    CLOSE
+                  </button>
+                  <button id="modal-submit">Submit</button>
+                </form>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {modal2 && (
-          <div className="modal">
-            <div onClick={toggleModal2} className="overlay"></div>
-            <div className="modal-content">
-              <div className="test">loop through all of your notes here</div>
+          {modal2 && (
+            <div className="modal">
+              <div onClick={toggleModal2} className="overlay"></div>
+              <div className="modal-content">
+                <div className="test">loop through all of your notes here</div>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-
-        {/* social icons */}
-        <div className="i-icons">
-          <img src={Github} alt="" />
-          <img src={LinkedIn} alt="" />
-          <img src={Instagram} alt="" />
+          {/* social icons */}
+          {/* <div className="i-icons">
+            <img src={Github} alt="" />
+            <img src={LinkedIn} alt="" />
+            <img src={Instagram} alt="" />
+          </div> */}
         </div>
+        {/* <div className="i-right">
+          <Calendar showWeekNumbers onChange={onChange} value={date} />
+        </div> */}
       </div>
-      {/* <div className="i-right">
-        <Calendar showWeekNumbers onChange={onChange} value={date} />
-      </div> */}
-    </div>
+
+      <Portfolio/>
+    </>
   );
 };
 

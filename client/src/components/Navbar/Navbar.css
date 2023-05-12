@@ -48,10 +48,17 @@
 }
 
 @media screen and (max-width: 480px) {
+  .n-wrapper {
+    margin-bottom: 0.5rem;
+  }
   .n-list {
     display: none;
   }
   .n-button:first-child {
     margin-right: 5px;
+  }
+
+  .btn-66 {
+    padding: 0 20px !important;
   }
 }
