@@ -11,11 +11,8 @@ import Github from "../../img/github.png";
 import LinkedIn from "../../img/linkedin.png";
 import Instagram from "../../img/instagram.png";
 import { themeContext } from "../../Context";
-import { motion } from "framer-motion";
-import { Link } from "react-scroll";
 import { useState } from "react";
-
-
+import { useNavigate } from "react-router-dom";
 
 const Intro = () => {
   // Transition
@@ -31,6 +28,8 @@ const Intro = () => {
   const [feedback, setFeedback] = useState("");
   const [modal2, setModel2] = useState(false);
   const [date, setDate] = useState(new Date());
+
+  const navigate = useNavigate();
 
   const onChange = date => {
     setDate(date);
@@ -76,8 +75,11 @@ const Intro = () => {
             Review
           </button>
           <button onClick={toggleModal2} className="button i-button">
-            my notes
+            My notes
           </button>
+          <a href="https://forms.gle/8byKgwRBMM8oaKdGA" target="_blank">
+            <button className="button i-button">Add</button>
+          </a>
         </div>
 
 
