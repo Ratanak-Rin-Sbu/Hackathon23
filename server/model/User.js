@@ -17,7 +17,7 @@ const UserSchema = Schema(
       minlength: 8,
     },
     gender: { type: String, enum: ["male", "female", "rather not say"] },
-    classes: [{ type: String }],
+    classes: [{ type: Schema.Types.ObjectId, ref: "Note" }],
   },
 
   { versionKey: false },

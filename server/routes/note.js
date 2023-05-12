@@ -24,7 +24,11 @@ router.post(
       createdDate: Date.now(),
       details: req.body.details,
     });
+    const user = req.user;
+    user.classes.push(newNote._id);
+    await user.save();
     await newNote.save();
+
     res.json(newNote);
   })
 );
