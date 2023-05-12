@@ -67,7 +67,7 @@
 .modal,
 .overlay {
   width: 100vw;
-  height: 100vh;
+  height: 120vh;
   top: 0;
   left: 0;
   right: 0;
@@ -103,12 +103,14 @@
 
 #modal-form {
   height: 45%;
+  width: 100%;
 }
 
 #modal-feedback {
   resize: none;
   width: 100%;
   height: 100%;
+  outline: none;
 }
 
 .modal-container {
@@ -123,14 +125,16 @@
 }
 
 /* right side styling */
-/* .i-right {
+.i-right {
   flex: 1;
-  position: relative;
 }
-.i-right > * {
+
+
+/* .i-right > * {
   position: absolute;
   z-index: 1;
-}
+} */
+/* 
 .i-right > :nth-child(1) {
   transform: scale(0.69);
   left: -15%;
