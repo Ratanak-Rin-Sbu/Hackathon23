@@ -53,36 +53,36 @@ const Form = () => {
                   label="Username"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.username}
+                  // value={values.username}
                   name="username"
-                  error={
-                    Boolean(touched.username) && Boolean(errors.username)
-                  }
-                  helperText={touched.username && errors.username}
+                  // error={
+                  //   Boolean(touched.username) && Boolean(errors.username)
+                  // }
+                  // helperText={touched.username && errors.username}
                   sx={{ gridColumn: "span 4" }}
                 />
                 <TextField
-                  label="email"
+                  label="Email"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.email}
+                  // value={values.email}
                   name="email"
-                  error={
-                    Boolean(touched.email) && Boolean(errors.email)
-                  }
-                  helperText={touched.email && errors.email}
+                  // error={
+                  //   Boolean(touched.email) && Boolean(errors.email)
+                  // }
+                  // helperText={touched.email && errors.email}
                   sx={{ gridColumn: "span 4" }}
                 />
                 <TextField
                   label="contact"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.contact}
+                  // value={values.contact}
                   name="contact"
-                  error={
-                    Boolean(touched.contact) && Boolean(errors.contact)
-                  }
-                  helperText={touched.contact && errors.contact}
+                  // error={
+                  //   Boolean(touched.contact) && Boolean(errors.contact)
+                  // }
+                  // helperText={touched.contact && errors.contact}
                   sx={{ gridColumn: "span 4" }}
                 />
               </>
