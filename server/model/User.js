@@ -2,21 +2,9 @@ const mongoose = require("mongoose");
 const { type } = require("os");
 const { Schema } = mongoose;
 
-const NoteSchema = Schema(
-  {
-    userName: { type: String },
-    className: { type: String },
-    createdDate: { type: Date, default: Date.now },
-    details: { type: String },
-  },
-
-  { versionKey: false },
-  { timestamp: true }
-);
-
 const UserSchema = Schema(
   {
-    name: { type: String, required: ["First Name field is required"] },
+    name: { type: String },
     email: {
       type: String,
       required: ["Email field is required"],
@@ -29,7 +17,7 @@ const UserSchema = Schema(
       minlength: 8,
     },
     gender: { type: String, enum: ["male", "female", "rather not say"] },
-    classes: [NoteSchema],
+    classes: [{ type: Schema.Types.ObjectId, ref: "Note" }],
   },
 
   { versionKey: false },
@@ -37,4 +25,3 @@ const UserSchema = Schema(
 );
 
 module.exports = mongoose.model("User", UserSchema);
-module.exports = mongoose.model("Note", NoteSchema);
