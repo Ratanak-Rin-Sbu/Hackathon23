@@ -1,21 +1,22 @@
 .Intro {
   display: flex;
-  height: 77vh;
-  margin-top: 6rem;
+  display: center;
+  align-items: center;
+  height: 100vh;
 }
 
 /* left side styling */
 .i-left {
   display: flex;
   position: relative;
-  flex: 1;
   flex-direction: column;
   gap: 2rem;
 }
 
 .i-name {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 0.25rem;
 }
 
