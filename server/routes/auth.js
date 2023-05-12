@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
 
 router.post("/register", async (req, res) => {
   const { name, email, password, gender } = req.body;
-  const checkUser = await User.findOne({ email });
+  const checkUser = await User.findOne({ email: email });
   if (checkUser) {
     res.status(406).json({ message: "User with email already exists" });
     return;
@@ -35,9 +35,11 @@ router.post("/login", async (req, res) => {
   console.log(req.body);
   //get all form data
   const { email, password } = req.body;
+
   // check if user exists, has valid credentials
   const user = await User.findOne({ email });
   //if the user does not exists
+
   if (!user) {
     res.status(406).json({ message: "User does not exist, register first" });
     return;

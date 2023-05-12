@@ -1,7 +1,7 @@
 import { ThemeProvider } from "./Context";
 
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 
 import "./App.css";
 import App from "./App";

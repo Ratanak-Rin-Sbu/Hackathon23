@@ -11,6 +11,31 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { setLogin } from "state";
+
+const registerSchema = yup.object().shape({
+  name: yup.string().required("required"),
+  email: yup.string().email("invalid email").required("required"),
+  password: yup.string().required("required"),
+  gender: yup.string().required("required"),
+});
+
+const loginSchema = yup.object().shape({
+  email: yup.string().email("invalid email").required("required"),
+  password: yup.string().required("required"),
+});
+
+const initialValuesRegister = {
+  name: "",
+  email: "",
+  password: "",
+  gender: "",
+};
+
+const initialValuesLogin = {
+  email: "",
+  password: "",
+};
 
 const Form = () => {
   const [pageType, setPageType] = useState("login");
@@ -22,12 +47,64 @@ const Form = () => {
   const isRegister = pageType === "register";
   const [isInvalidInput, setIsInvalidInput] = useState(false);
 
-  console.log(pageType);
+  const register = async (values, onSubmitProps) => {
+    const formData = new FormData();
+    for (let value in values) {
+      formData.append(value, values[value]);
+    }
+
+    const savedUserResponse = await fetch(
+      "http://localhost:4000/api/auth/register",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    const savedUser = await savedUserResponse.json();
+    onSubmitProps.resetForm();
+
+    console.log(savedUser);
+
+    if (savedUser) {
+      setPageType("login");
+    } else {
+      console.log("not working")
+    }
+  };
+
+  const login = async (values, onSubmitProps) => {
+    const loggedInResponse = await fetch("http://localhost:4000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    });
+    const loggedIn = await loggedInResponse.json();
+    onSubmitProps.resetForm();
+    console.log(loggedIn);
+    if (loggedIn) {
+      dispatch(
+        setLogin({
+          user: loggedIn.user,
+          token: loggedIn.token,
+        })
+      );
+      navigate("/home");
+      setIsInvalidInput(false);
+    } else {
+      setIsInvalidInput(true)
+    }
+  };
+
+  const handleFormSubmit = async (values, onSubmitProps) => {
+    if (isLogin) await login(values, onSubmitProps);
+    if (isRegister) await register(values, onSubmitProps);
+  };
+
   return (
     <Formik
-      // onSubmit={handleFormSubmit}
-      // initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
-      // validationSchema={isLogin ? loginSchema : registerSchema}
+      onSubmit={handleFormSubmit}
+      initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
+      validationSchema={isLogin ? loginSchema : registerSchema}
     >
       {({
         values,
@@ -51,39 +128,50 @@ const Form = () => {
             {isRegister ? (
               <>
               <TextField
-                label="Username"
+                label="Name"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                // value={values.username}
-                name="username"
-                // error={
-                //   Boolean(touched.username) && Boolean(errors.username)
-                // }
-                // helperText={touched.username && errors.username}
+                value={values.name}
+                name="name"
+                error={
+                  Boolean(touched.name) && Boolean(errors.name)
+                }
+                helperText={touched.name && errors.name}
                 sx={{ gridColumn: "span 4" }}
               />
               <TextField
                 label="Email"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                // value={values.email}
+                value={values.email}
                 name="email"
-                // error={
-                //   Boolean(touched.email) && Boolean(errors.email)
-                // }
-                // helperText={touched.email && errors.email}
+                error={
+                  Boolean(touched.email) && Boolean(errors.email)
+                }
+                helperText={touched.email && errors.email}
                 sx={{ gridColumn: "span 4" }}
               />
               <TextField
-                label="Contact"
+                label="Password"
+                type="password"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                // value={values.contact}
-                name="contact"
-                // error={
-                //   Boolean(touched.contact) && Boolean(errors.contact)
-                // }
-                // helperText={touched.contact && errors.contact}
+                value={values.password}
+                name="password"
+                error={Boolean(touched.password) && Boolean(errors.password)}
+                helperText={touched.password && errors.password}
+                sx={{ gridColumn: "span 4" }}
+              />
+              <TextField
+                label="Gender"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.gender}
+                name="gender"
+                error={
+                  Boolean(touched.gender) && Boolean(errors.gender)
+                }
+                helperText={touched.gender && errors.gender}
                 sx={{ gridColumn: "span 4" }}
               />
             </>
@@ -93,10 +181,10 @@ const Form = () => {
                   label="Email"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  // value={values.email}
+                  value={values.email}
                   name="email"
-                  // error={Boolean(touched.email) && Boolean(errors.email)}
-                  // helperText={touched.email && errors.email}
+                  error={Boolean(touched.email) && Boolean(errors.email)}
+                  helperText={touched.email && errors.email}
                   sx={{ gridColumn: "span 4" }}
                 />
                 <TextField
@@ -104,10 +192,10 @@ const Form = () => {
                   type="password"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  // value={values.password}
+                  value={values.password}
                   name="password"
-                  // error={Boolean(touched.password) && Boolean(errors.password)}
-                  // helperText={touched.password && errors.password}
+                  error={Boolean(touched.password) && Boolean(errors.password)}
+                  helperText={touched.password && errors.password}
                   sx={{ gridColumn: "span 4" }}
                 />
               </>

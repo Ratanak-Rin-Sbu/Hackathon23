@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: left;
   display: flex;
-  gap: 2rem;
+  gap: 10px;
 }
 
 .n-name {
@@ -43,8 +43,15 @@
   flex: 2;
 }
 
+.n-button:first-child {
+  margin-right: 10px;
+}
+
 @media screen and (max-width: 480px) {
   .n-list {
     display: none;
+  }
+  .n-button:first-child {
+    margin-right: 5px;
   }
 }

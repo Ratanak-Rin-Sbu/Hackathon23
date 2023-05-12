@@ -72,12 +72,15 @@ const Intro = () => {
         {/* <Link to="contact" smooth={true} spy={true}>
           <button className="button i-button">Review</button>
         </Link> */}
-        <button onClick={toggleModal} className="button i-button">
-          Review
-        </button>
-        <button onClick={toggleModal2} className="button i-button">
-          my notes
-        </button>
+        <div className="modals">
+          <button onClick={toggleModal} className="button i-button">
+            Review
+          </button>
+          <button onClick={toggleModal2} className="button i-button">
+            my notes
+          </button>
+        </div>
+
 
         {modal && (
           <div className="modal">
@@ -119,9 +122,9 @@ const Intro = () => {
           <img src={Instagram} alt="" />
         </div>
       </div>
-      <div className="i-right">
+      {/* <div className="i-right">
         <Calendar showWeekNumbers onChange={onChange} value={date} />
-      </div>
+      </div> */}
     </div>
   );
 };
