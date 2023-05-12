@@ -14,6 +14,7 @@ import { themeContext } from "../../Context";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const Intro = () => {
   // Transition
   const transition = { duration: 2, type: "spring" };
