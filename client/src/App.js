@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import LoginPage from './components/Login';
 import { CssBaseline } from "@mui/material";
 import HomePage from './components/Homepage';
+import Community from 'components/Community';
 
 function App() {
 
@@ -14,6 +15,10 @@ function App() {
           <Route
             path="/home"
             element={<HomePage/>}
+          />
+          <Route
+            path="/community"
+            element={<Community/>}
           />
         </Routes>
       </BrowserRouter>
