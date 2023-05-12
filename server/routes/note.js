@@ -6,27 +6,26 @@ const Note = require("../model/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = "jwt secret string";
+const { wrapAsync } = require("../utils/helper");
 
 router.get("/", (req, res) => {
   console.log("note route running");
 });
 
 router.post(
-  "/postNote",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    console.log("REQ", req.user);
-    const { className, details } = req.body;
-    const note = new Note({
-      userName: req.user.name,
-      className,
-      details,
+  "/postNotes",
+  wrapAsync(async function (req, res) {
+    console.log("Posted with body: " + JSON.stringify(req.body));
+    const newNote = new Note({
+      userName: req.body.userName,
+      className: req.body.className,
       createdDate: Date.now(),
+      details: req.body.details,
     });
 
-    await note.save();
-    res.send({ message: "Successfully saved on DB" });
-  }
+    await newNote.save();
+    res.json(newQuestion);
+  })
 );
 // router.get(
 //   "/getTransactions",
