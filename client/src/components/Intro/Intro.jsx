@@ -14,6 +14,8 @@ import { themeContext } from "../../Context";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
 import { useState } from "react";
+import Calendar from "react-calendar";
+
 
 
 const Intro = () => {
@@ -29,6 +31,11 @@ const Intro = () => {
   const [classes, setClasses] = useState([]);
   const [feedback, setFeedback] = useState("");
   const [modal2, setModel2] = useState(false);
+  const [date, setDate] = useState(new Date());
+
+  const onChange = date => {
+    setDate(date);
+  };
 
   const toggleModal = () => {
     setModal(!modal);
@@ -113,7 +120,7 @@ const Intro = () => {
         </div>
       </div>
       <div className="i-right">
-        right side
+        <Calendar showWeekNumbers onChange={onChange} value={date} />
       </div>
     </div>
   );
