@@ -2,10 +2,11 @@ import React from "react";
 import Toggle from "../Toggle/Toggle";
 import "./Navbar.css";
 import { Link } from "react-scroll";
-// import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLogout } from "state";
 
 const Navbar = () => {
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <div className="n-wrapper" id="Navbar">
@@ -43,15 +44,12 @@ const Navbar = () => {
                 Testimonial
               </Link>
             </li>
-            {/* LOGIN */}
-            {/* <li onClick={() => navigate('/login')}>
-              Sign in / Sign up
-            </li> */}
           </ul>
         </div>
         <Link to="contact" spy={true} smooth={true}>
         <button className="button n-button">Contact</button>
         </Link>
+        <button className="button n-button" onClick={() => dispatch(setLogout())}>Logout</button>
       </div>
     </div>
   );
