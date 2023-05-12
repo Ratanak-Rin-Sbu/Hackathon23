@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 const mongoose = require("mongoose");
 const Note = require("../model/User");
-const passport = require("passport");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = "jwt secret string";
 
 router.get("/", (req, res) => {
   console.log("note route running");
@@ -12,15 +15,16 @@ router.post(
   "/postNote",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
-    console.log(req.user);
+    console.log("REQ", req.user);
     const { className, details } = req.body;
-    const transaction = new Note({
+    const note = new Note({
       userName: req.user.name,
       className,
       details,
-      createdDate,
+      createdDate: Date.now(),
     });
-    await transaction.save();
+
+    await note.save();
     res.send({ message: "Successfully saved on DB" });
   }
 );
