@@ -18,6 +18,7 @@ import Calendar from "react-calendar";
 
 
 
+
 const Intro = () => {
   // Transition
   const transition = { duration: 2, type: "spring" };
