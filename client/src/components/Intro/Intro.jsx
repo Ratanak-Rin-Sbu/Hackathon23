@@ -28,16 +28,28 @@ const Intro = () => {
   const [lesson, setLesson] = useState("");
   const [classes, setClasses] = useState([]);
   const [feedback, setFeedback] = useState("");
+  const [modal2, setModel2] = useState(false);
 
   const toggleModal = () => {
     setModal(!modal);
   };
+
+  const toggleModal2 = () => {
+    setModel2(!modal2);
+  }
 
   if (modal) {
     document.body.classList.add('active-modal')
   } else {
     document.body.classList.remove('active-modal')
   }
+
+  if (modal2) {
+    document.body.classList.add('active-modal2')
+  } else {
+    document.body.classList.remove('active-modal2')
+  }
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -54,7 +66,10 @@ const Intro = () => {
           <button className="button i-button">Review</button>
         </Link> */}
         <button onClick={toggleModal} className="button i-button">
-          Open
+          Review
+        </button>
+        <button onClick={toggleModal2} className="button i-button">
+          my notes
         </button>
 
         {modal && (
@@ -79,12 +94,26 @@ const Intro = () => {
             </div>
           </div>
         )}
+
+        {modal2 && (
+          <div className="modal">
+            <div onClick={toggleModal2} className="overlay"></div>
+            <div className="modal-content">
+              <div className="test">loop through all of your notes here</div>
+            </div>
+          </div>
+        )}
+
+
         {/* social icons */}
         <div className="i-icons">
           <img src={Github} alt="" />
           <img src={LinkedIn} alt="" />
           <img src={Instagram} alt="" />
         </div>
+      </div>
+      <div className="i-right">
+        right side
       </div>
     </div>
   );
