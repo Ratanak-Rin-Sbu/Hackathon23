@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const User = require("../model /User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = "jwt secret string";
 const passport = require("passport");
 
 router.get("/", (req, res) => {
@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
 
 router.post("/register", async (req, res) => {
   //get all form data
-  const { name, email, password } = req.body;
+  const { name, email, password, gender } = req.body;
   // check if user exists, has valid credentials
   const checkUser = await User.findOne({ email });
   if (checkUser) {
@@ -29,6 +29,7 @@ router.post("/register", async (req, res) => {
     email,
     name,
     password: hashedPassword,
+    gender,
   });
   await user.save();
   res.status(201).json({ message: "User registered Successfully" });
@@ -57,9 +58,15 @@ router.post("/login", async (req, res) => {
   res.send({ message: "User successfully logged in", token, user });
 });
 
-router.get("/getCurrentUser", (req, res) => {
-  res.send("API for authentication running");
-});
+router.get(
+  "/getCurrentUser",
+  passport.authenticate("jwt", { session: false }),
+
+  (req, res) => {
+    // console.log("Current user is", req.user);
+    res.json(req.user);
+  }
+);
 
 router.post("/logout", (req, res) => {
   res.send("API for authentication running");
