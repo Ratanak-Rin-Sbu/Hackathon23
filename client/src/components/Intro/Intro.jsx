@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Intro.css";
 import Vector1 from "../../img/Vector1.png";
 import Vector2 from "../../img/Vector2.png";
@@ -14,11 +14,33 @@ import { themeContext } from "../../Context";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
 import { useState } from "react";
-
-
-
+import Cookies from "js-cookie";
 
 const Intro = () => {
+  const [notes, setNotes] = useState([]);
+  useEffect(() => {
+    console.log("notes", notes);
+  }, [notes]);
+  useEffect(() => {
+    fetchNotes();
+  }, []);
+  const fetchNotes = async () => {
+    const token = Cookies.get("token");
+    console.log(token);
+    const res = await fetch(`/api/note/getNotes`, {
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "include",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "GET",
+    });
+    const response = await res.json();
+    console.log(response);
+
+    // setNotes(response);
+  };
+
   // Transition
   const transition = { duration: 2, type: "spring" };
 
@@ -33,7 +55,7 @@ const Intro = () => {
   const [modal2, setModel2] = useState(false);
   const [date, setDate] = useState(new Date());
 
-  const onChange = date => {
+  const onChange = (date) => {
     setDate(date);
   };
 
@@ -43,25 +65,24 @@ const Intro = () => {
 
   const toggleModal2 = () => {
     setModel2(!modal2);
-  }
+  };
 
   if (modal) {
-    document.body.classList.add('active-modal')
+    document.body.classList.add("active-modal");
   } else {
-    document.body.classList.remove('active-modal')
+    document.body.classList.remove("active-modal");
   }
 
   if (modal2) {
-    document.body.classList.add('active-modal2')
+    document.body.classList.add("active-modal2");
   } else {
-    document.body.classList.remove('active-modal2')
+    document.body.classList.remove("active-modal2");
   }
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(feedback);
-  }
+  };
 
   return (
     <div className="Intro" id="Intro">
@@ -81,7 +102,6 @@ const Intro = () => {
           </button>
         </div>
 
-
         {modal && (
           <div className="modal">
             <div onClick={toggleModal} className="overlay"></div>
@@ -89,12 +109,13 @@ const Intro = () => {
               <h2>(name of today's class/lesson)</h2>
               <p>(date: 2/2/23)</p>
               <p>(today's class: ex. oil painting)</p>
-              <div className="input-text">
-                Write your feedback!
-              </div>
+              <div className="input-text">Write your feedback!</div>
               <form id="modal-form" onSubmit={handleSubmit}>
                 <div className="modal-container">
-                  <textarea id="modal-feedback" onChange={e => setFeedback(e.target.value)}></textarea>
+                  <textarea
+                    id="modal-feedback"
+                    onChange={(e) => setFeedback(e.target.value)}
+                  ></textarea>
                 </div>
                 <button className="close-modal" onClick={toggleModal}>
                   CLOSE
@@ -113,7 +134,6 @@ const Intro = () => {
             </div>
           </div>
         )}
-
 
         {/* social icons */}
         <div className="i-icons">
