@@ -1,7 +1,8 @@
 import { ThemeProvider } from "./Context";
 
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
+
 import "./App.css";
 import App from "./App";
 import authReducer from "./state";
