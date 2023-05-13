@@ -12,7 +12,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "state";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 const registerSchema = yup.object().shape({
   name: yup.string().required("required"),

@@ -22,12 +22,15 @@ import { useSelector } from "react-redux";
 const Intro = () => {
   const [classes, setClasses] = useState([]);
   const token = useSelector((state) => state.token);
+
   useEffect(() => {
     fetchNotes();
   }, []);
+
   useEffect(() => {
     console.log(classes);
   }, [classes]);
+
   const fetchNotes = async () => {
     const res = await fetch(`/api/note/getNotes`, {
       headers: {
@@ -108,39 +111,40 @@ const Intro = () => {
 
   const [openModal, setOpenModal] = useState(false);
   const [className, setClassName] = useState("");
-  const [interest, setInterest] = useState("");
+  const [details, setDetails] = useState("");
+  const user = useSelector((state) => state.user);
 
   const updateClassName = (e) => {
     setClassName(e);
   }
 
-  const updateInterest = (e) => {
-    setInterest(e);
+  const updateDetails = (e) => {
+    setDetails(e);
   }
 
   const closeModal = () => {
     setOpenModal(false);
   }
 
-  // const createNote = async () => {
-  //   await fetch('http://localhost:4000/api/note/postNotes', {
-  //     headers: {
-  //       'Content-Type': 'application/json; charset=UTF-8'
-  //     },
-  //     method: 'PUT',
-  //     body: JSON.stringify({
-  //       name: name,
-  //       place: location,
-  //       color: color,
-  //       start: startTime,
-  //       end: endTime,
-  //       days: days
-  //     })
-  //   }).then((response) => {
-  //     console.log('event updated');
-  //   });
-  //   setOpenModal(false);
-  // };
+  const createNote = async () => {
+    await fetch(`/api/note/postNotes`, {
+      headers: {
+        "Content-Type": "application/json",
+        credentials: "include",
+        Authorization: `Bearer ${token}`,
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        userName: user.name,
+        className: className,
+        createdDate: Date.now(),
+        details: details
+      })
+    }).then((response) => {
+      console.log('interest/class/note created');
+    });
+    setOpenModal(false);
+  };
 
   return (
     <>
@@ -190,24 +194,22 @@ const Intro = () => {
                 className="myschedule-modal-input"
                 type="text"
                 placeholder="Your Interest"
-                defaultValue={className}
-                // onChange={event => setName(event.target.value)}
+                // defaultValue={className}
                 onChange={(e) => {updateClassName(e.target.value)}}
               />
               <input
                 className="myschedule-modal-input"
                 type="text"
                 placeholder="Details"
-                defaultValue={interest}
-                // onChange={event => setName(event.target.value)}
-                onChange={(e) => {updateInterest(e.target.value)}}
+                // defaultValue={details}
+                onChange={(e) => {updateDetails(e.target.value)}}
               />
               
 
               {/* ADD BUTTON */}
               <button
                 className="btn-add"
-                // onClick={updateEvent}
+                onClick={createNote}
               >
                 ADD YOUR INTEREST
               </button>
