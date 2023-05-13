@@ -21,13 +21,14 @@ import { useSelector } from "react-redux";
 
 const Intro = () => {
   const [classes, setClasses] = useState([]);
+  const [notes, setNotes] = useState([]);
   const token = useSelector((state) => state.token);
   useEffect(() => {
     fetchNotes();
   }, []);
-  useEffect(() => {
-    console.log(classes);
-  }, [classes]);
+  // useEffect(() => {
+  //   console.log(classes["notes"]);
+  // }, [classes]);
   const fetchNotes = async () => {
     const res = await fetch(`/api/note/getNotes`, {
       headers: {
@@ -38,29 +39,30 @@ const Intro = () => {
       method: "GET",
     });
     const notes = await res.json();
+    // console.log(notes);
     setClasses(notes);
+    console.log(notes);
   };
-  const renderNotes = () => {
-    return classes.map(async (noteId) => {
-      const token = Cookies.get("token");
-      const res = await fetch(`/api/note/getNote/${noteId}`, {
-        headers: {
-          "Content-Type": "application/json",
-          credentials: "include",
-          Authorization: `Bearer ${token}`,
-        },
-        method: "GET",
-      });
-      const note = await res.json();
+  // const renderNotes = () => {
+  //   return classes.map(async (noteId) => {
+  //     const res = await fetch(`/api/note/getNoteById/${noteId}`, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         credentials: "include",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       method: "GET",
+  //     });
+  //     const note = await res.json();
 
-      return (
-        <div key={note._id}>
-          <h3>{note.details}</h3>
-          <p>{note.createdDate}</p>
-        </div>
-      );
-    });
-  };
+  //     return (
+  //       <div key={note._id}>
+  //         <h3>{note.details}</h3>
+  //         <p>{note.createdDate}</p>
+  //       </div>
+  //     );
+  //   });
+  // };
 
   // Transition
   const transition = { duration: 2, type: "spring" };
@@ -85,8 +87,26 @@ const Intro = () => {
     setModal(!modal);
   };
 
-  const toggleModal2 = () => {
+  const toggleModal2 = async () => {
     setModel2(!modal2);
+    if (!modal2) {
+      const promises = classes.map(async (classItem) => {
+        const res = await fetch(`/api/note/getNoteById/${classItem._id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            credentials: "include",
+            Authorization: `Bearer ${token}`,
+          },
+          method: "GET",
+        });
+
+        const note = await res.json();
+        return { note, classItem };
+      });
+
+      const results = await Promise.all(promises);
+      setNotes(results);
+    }
   };
 
   if (modal) {

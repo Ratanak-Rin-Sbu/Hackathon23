@@ -25,24 +25,22 @@ router.get(
 );
 router.get(
   "/getNoteById/:id",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   wrapAsync(async function (req, res) {
-    console.log("getting notes of", req.user, req.user._id);
-    const user = await User.findById(req.user._id);
-    const classes = user.classes;
-    res.json({ notes: classes });
+    try {
+      const noteId = req.params.id;
+      const note = await Note.findById(noteId);
+      if (!note) {
+        return res.status(404).json({ message: "note not found" });
+      }
+      res.json(note);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Server Error" });
+    }
   })
 );
 
-// router.delete(
-//   "/delete/:id",
-//   passport.authenticate("jwt", { session: false }),
-//   async (req, res) => {
-//     const _id = req.params.id;
-//     await Transaction.findOneAndDelete({ _id: _id });
-//     res.json({ message: "Successfully deleted from DB" });
-//   }
-// );
 router.post(
   "/postNotes",
   passport.authenticate("jwt", { session: false }),
