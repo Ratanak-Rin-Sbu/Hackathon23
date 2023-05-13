@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap");
 
 .Intro {
   display: flex;
@@ -28,21 +28,21 @@
   /* margin-bottom: 30px; */
 }
 
-.i-name> :nth-child(1) {
+.i-name > :nth-child(1) {
   font-family: "Rubik", sans-serif;
   color: var(--black);
   font-weight: bold;
   font-size: 3rem;
 }
 
-.i-name> :nth-child(2) {
+.i-name > :nth-child(2) {
   font-family: "Rubik", sans-serif;
   color: var(--orange);
   font-weight: bold;
   font-size: 3rem;
 }
 
-.i-name> :nth-child(3) {
+.i-name > :nth-child(3) {
   font-family: "Rubik", sans-serif;
   font-weight: 100;
   font-size: 14px;
@@ -69,12 +69,12 @@
   gap: 0rem;
 }
 
-.i-icons>* {
+.i-icons > * {
   font-family: "Rubik", sans-serif;
   transform: scale(0.5);
 }
 
-.i-icons>*:hover {
+.i-icons > *:hover {
   font-family: "Rubik", sans-serif;
   cursor: pointer;
 }
@@ -167,7 +167,6 @@
   flex: 1;
 }
 
-
 /* .i-right > * {
   position: absolute;
   z-index: 1;
@@ -227,9 +226,9 @@ button {
   width: auto;
   appearance: none;
   background-color: #2ea44f;
-  border: 1px solid rgba(27, 31, 35, .15);
+  border: 1px solid rgba(27, 31, 35, 0.15);
   border-radius: 6px;
-  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
@@ -255,19 +254,19 @@ button:hover {
 
 button:active {
   background-color: #298e46;
-  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+  box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
   -webkit-transform: translate(5px, 5px);
   transform: translate(5px, 5px);
 }
 
 button:focus {
-  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
-  outline: none
+  box-shadow: rgba(46, 164, 79, 0.4) 0 0 0 3px;
+  outline: none;
 }
 
 button:focus:not(:focus-visible):not(.focus-visible) {
   box-shadow: none;
-  outline: none
+  outline: none;
 }
 
 @media screen and (max-width: 480px) {
@@ -289,7 +288,6 @@ button:focus:not(:focus-visible):not(.focus-visible) {
   .floating-div:nth-of-type(1) {
     /* display: none; */
     top: -7rem !important;
-    ;
   }
 
   .i-button {

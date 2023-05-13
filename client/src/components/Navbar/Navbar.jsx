@@ -7,49 +7,36 @@ import { setLogout } from "state";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const [buttonText, setButtonText] = useState("Contact");
-
-  function handleMouseOver() {
-    setButtonText("Provider?");
-  }
-
-  function handleMouseOut() {
-    setButtonText("Contact");
-  }
+  const [button1Text, setButton1Text] = useState("Are you a Provider?");
+  const [button2Text, setButton2Text] = useState("Button");
 
   return (
     <div className="n-wrapper" id="Navbar">
-      {/* left */}
       <div className="n-left">
         <Toggle />
       </div>
-      {/* right */}
       <div className="n-right">
+        <div className="n-list">
+          <ul style={{ listStyleType: "none" }}></ul>
+        </div>
         <Link to="contact" spy={true} smooth={true}>
           <button
-            id="my-btn"
-            className="btn-66 contact"
-            onMouseOver={handleMouseOver}
-            onMouseOut={handleMouseOut}
+            className="btn-3"
+            onMouseEnter={() => setButton1Text("Contact us")}
+            onMouseLeave={() => setButton1Text("Are you a Provider?")}
           >
-            {buttonText}
+            {button1Text}
           </button>
         </Link>
-        <button className="btn-66" onClick={() => dispatch(setLogout())}>
-          Logout
+        <button
+          className="btn-3"
+          onClick={() => dispatch(setLogout())}
+          onMouseEnter={() => setButton2Text("Are you sure?")}
+          onMouseLeave={() => setButton2Text("Logout?")}
+        >
+          {button2Text}
         </button>
       </div>
-      <script>
-        {`
-          const btn = document.getElementById("my-btn");
-          btn.addEventListener("mouseover", function () {
-            btn.innerText = "Provider?";
-          });
-          btn.addEventListener("mouseout", function () {
-            btn.innerText = "Contact";
-          });
-        `}
-      </script>
     </div>
   );
 };
