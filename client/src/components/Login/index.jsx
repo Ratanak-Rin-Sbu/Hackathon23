@@ -17,16 +17,18 @@ const LoginPage = () => {
     <Box>
       <Box
         width={isNonMobileScreens ? "50%" : "93%"}
+        margin={0}
         p="2rem"
         m="2rem auto"
         borderRadius="1.5rem"
       >
-        <Box width="100%" p="1rem 6%" textAlign="center"></Box>
+        <Box width="100%" /* p="1rem 6%" */ textAlign="center"></Box>
         <div
-          style={{ height: "300px", width: "300px", alignContent: "center" }}
+          style={{ height: "300px", width: "300px", alignContent: "center", margin: "0 0 0 150px" }}
         >
           <Lottie options={defaultOptions} />
         </div>
+
         <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
           A new way to improve your learning creativity!
         </Typography>

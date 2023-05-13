@@ -31,7 +31,7 @@ const Navbar = () => {
         <button
           className="btn-3"
           onClick={() => dispatch(setLogout())}
-          onMouseEnter={() => setButton2Text("Are you sure?")}
+          onMouseEnter={() => setButton2Text("You sure?")}
           onMouseLeave={() => setButton2Text("Logout?")}
         >
           {button2Text}
