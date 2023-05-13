@@ -46,15 +46,7 @@ const Intro = () => {
 
   useEffect(() => {
     fetchNotes();
-  }, []);
-
-  useEffect(() => {
-    console.log(notes);
   }, [notes]);
-
-  // useEffect(() => {
-  //   console.log(classes["notes"]);
-  // }, [classes]);
 
   const fetchNotes = async () => {
     const res = await fetch(`/api/note/getNotes`, {
@@ -71,38 +63,6 @@ const Intro = () => {
   };
 
   console.log(notes);
-  // const fetchNotesId = async () => {
-  //   const res = await fetch(`/api/note/getNoteById/${classes.notes[0]}`, {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       credentials: "include",
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //     method: "GET",
-  //   });
-  //   const notesId = await res.json();
-  //   setNotes(notesId);
-  // }
-  // const renderNotes = () => {
-  //   return classes.map(async (noteId) => {
-  //     const res = await fetch(`/api/note/getNoteById/${noteId}`, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         credentials: "include",
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //       method: "GET",
-  //     });
-  //     const note = await res.json();
-
-  //     return (
-  //       <div key={note._id}>
-  //         <h3>{note.details}</h3>
-  //         <p>{note.createdDate}</p>
-  //       </div>
-  //     );
-  //   });
-  // };
 
   // Transition
   const transition = { duration: 4, type: "spring" };

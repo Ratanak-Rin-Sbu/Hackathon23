@@ -29,7 +29,7 @@ router.get(
           // return res.status(404).json({ message: "note not found" });
           ;
         } else {
-          notes.push(note)
+          notes.unshift(note)
         }
       } catch (error) {
         console.log(error);
