@@ -67,9 +67,10 @@ const Intro = () => {
     });
     const notess = await res.json();
     setNotes(notess);
-    console.log(notes);
+    // console.log(notes);
   };
 
+  console.log(notes);
   // const fetchNotesId = async () => {
   //   const res = await fetch(`/api/note/getNoteById/${classes.notes[0]}`, {
   //     headers: {
@@ -155,7 +156,7 @@ const Intro = () => {
     setOpenModal(false);
   };
 
-  if (notes.length !== 0) {
+  if (notes.length !== 0 && notes.message !== "note not found") {
     return (
       <>
         <div className="Intro" id="Intro">

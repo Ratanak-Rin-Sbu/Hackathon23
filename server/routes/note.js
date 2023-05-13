@@ -26,9 +26,11 @@ router.get(
         const noteId = classes[i];
         const note = await Note.findById(noteId);
         if (!note) {
-          return res.status(404).json({ message: "note not found" });
+          // return res.status(404).json({ message: "note not found" });
+          ;
+        } else {
+          notes.push(note)
         }
-        notes.push(note)
       } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Server Error" });
