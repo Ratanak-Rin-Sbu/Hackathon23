@@ -18,13 +18,13 @@ const LoginPage = () => {
       <Box
         width={isNonMobileScreens ? "50%" : "93%"}
         margin={0}
-        p="2rem"
-        m="2rem auto"
+        m="0 auto"
         borderRadius="1.5rem"
+        height="100vh"
       >
         <Box width="100%" /* p="1rem 6%" */ textAlign="center"></Box>
         <div
-          style={{ height: "300px", width: "300px", alignContent: "center", margin: "0 0 0 150px" }}
+          style={{ width: "300px", alignContent: "center", margin: "0 auto" }}
         >
           <Lottie options={defaultOptions} />
         </div>

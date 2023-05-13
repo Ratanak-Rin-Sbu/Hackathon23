@@ -15,9 +15,12 @@ body,
   --smboxShadow: -79px 51px 60px rgba(0, 0, 0, 0.08);
 }
 
+html,
+body,
+#root,
 .App {
-  padding: 1rem 4rem;
-  overflow: hidden;
+  /* padding: 1rem 4rem; */
+  /* overflow: hidden; */
   color: var(--black);
   height: 100%;
   width: 100%;
