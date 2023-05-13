@@ -20,7 +20,7 @@ import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 
 const Intro = () => {
-  const [classes, setClasses] = useState([]);
+  // const [classes, setClasses] = useState([]);
   const [notes, setNotes] = useState([]);
   const token = useSelector((state) => state.token);
 
@@ -29,8 +29,8 @@ const Intro = () => {
   }, []);
 
   useEffect(() => {
-    console.log(classes);
-  }, [classes]);
+    console.log(notes);
+  }, [notes]);
 
   // useEffect(() => {
   //   console.log(classes["notes"]);
@@ -45,11 +45,23 @@ const Intro = () => {
       credentials: "include",
       method: "GET",
     });
-    const notes = await res.json();
-    // console.log(notes);
-    setClasses(notes);
+    const notess = await res.json();
+    setNotes(notess);
     console.log(notes);
   };
+
+  // const fetchNotesId = async () => {
+  //   const res = await fetch(`/api/note/getNoteById/${classes.notes[0]}`, {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       credentials: "include",
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //     method: "GET",
+  //   });
+  //   const notesId = await res.json();
+  //   setNotes(notesId);
+  // }
   // const renderNotes = () => {
   //   return classes.map(async (noteId) => {
   //     const res = await fetch(`/api/note/getNoteById/${noteId}`, {
@@ -78,62 +90,11 @@ const Intro = () => {
   const theme = useContext(themeContext);
   const darkMode = theme.state.darkMode;
 
-  const [modal, setModal] = useState(false);
-  const [lesson, setLesson] = useState("");
   const [feedback, setFeedback] = useState("");
-  const [modal2, setModel2] = useState(false);
   const [date, setDate] = useState(new Date());
 
-  const navigate = useNavigate();
-
-  const onChange = (date) => {
-    setDate(date);
-  };
-
-  const toggleModal = () => {
-    setModal(!modal);
-  };
-
-  const toggleModal2 = async () => {
-    setModel2(!modal2);
-    if (!modal2) {
-      const promises = classes.map(async (classItem) => {
-        const res = await fetch(`/api/note/getNoteById/${classItem._id}`, {
-          headers: {
-            "Content-Type": "application/json",
-            credentials: "include",
-            Authorization: `Bearer ${token}`,
-          },
-          method: "GET",
-        });
-
-        const note = await res.json();
-        return { note, classItem };
-      });
-
-      const results = await Promise.all(promises);
-      setNotes(results);
-    }
-  };
-
-  if (modal) {
-    document.body.classList.add("active-modal");
-  } else {
-    document.body.classList.remove("active-modal");
-  }
-
-  if (modal2) {
-    document.body.classList.add("active-modal2");
-  } else {
-    document.body.classList.remove("active-modal2");
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(feedback);
-  };
-
   const [openModal, setOpenModal] = useState(false);
+  const [openModal2, setOpenModal2] = useState(false);
   const [className, setClassName] = useState("");
   const [details, setDetails] = useState("");
   const user = useSelector((state) => state.user);
@@ -148,6 +109,10 @@ const Intro = () => {
 
   const closeModal = () => {
     setOpenModal(false);
+  }
+
+  const closeModal2 = () => {
+    setOpenModal2(false);
   }
 
   const createNote = async () => {
@@ -170,91 +135,185 @@ const Intro = () => {
     setOpenModal(false);
   };
 
-  return (
-    <>
-      <div className="Intro" id="Intro">
-        <div className="i-left">
-          <div className="i-name">
-            <span style={{ color: darkMode ? "white" : "" }}>
-              Today's Popup
-            </span>
-          </div>
-          <div className="modals">
-            <button onClick={() => {setOpenModal(true)}} className="button i-button">
-              Review
-            </button>
-            <button onClick={toggleModal2} className="button i-button">
-              My notes
-            </button>
-            <a
-              href="https://forms.gle/8byKgwRBMM8oaKdGA"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <button className="button i-button">Find interests</button>
-            </a>
-          </div>
-
-          <Modal
-            m="1% 6% 0 6%"
-            open={openModal}
-            onClose={closeModal}
-          >
-            <Box
-              sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: 400,
-                height: "auto",
-                backgroundColor: "#DDDDDD",
-                boxShadow: 24,
-                borderRadius: "10px",
-                p: 4,
-              }}
-            >
-              <input
-                className="myschedule-modal-input"
-                type="text"
-                placeholder="Your Interest"
-                // defaultValue={className}
-                onChange={(e) => {updateClassName(e.target.value)}}
-              />
-              <input
-                className="myschedule-modal-input"
-                type="text"
-                placeholder="Details"
-                // defaultValue={details}
-                onChange={(e) => {updateDetails(e.target.value)}}
-              />
-              
-
-              {/* ADD BUTTON */}
-              <button
-                className="btn-add"
-                onClick={createNote}
-              >
-                ADD YOUR INTEREST
-              </button>
-            </Box>
-          </Modal>
-          
-          {modal2 && (
-            <div className="modal">
-              <div onClick={toggleModal2} className="overlay"></div>
-              <div className="modal-content">
-                <div className="test">loop through all of your notes here</div>
-              </div>
+  if (notes.length !== 0) {
+    return (
+      <>
+        <div className="Intro" id="Intro">
+          <div className="i-left">
+            <div className="i-name">
+              <span style={{ color: darkMode ? "white" : "" }}>
+                Today's Popup
+              </span>
             </div>
-          )}
-
+            <div className="modals">
+              <button onClick={() => {setOpenModal(true)}} className="button i-button">
+                Review
+              </button>
+              <button onClick={() => {setOpenModal2(true)}} className="button i-button">
+                My notes
+              </button>
+              <a
+                href="https://forms.gle/8byKgwRBMM8oaKdGA"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <button className="button i-button">Find interests</button>
+              </a>
+            </div>
+  
+            <Modal
+              m="1% 6% 0 6%"
+              open={openModal}
+              onClose={closeModal}
+            >
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: 400,
+                  height: "auto",
+                  backgroundColor: "#DDDDDD",
+                  boxShadow: 24,
+                  borderRadius: "10px",
+                  p: 4,
+                }}
+              >
+                <input
+                  className="myschedule-modal-input"
+                  type="text"
+                  placeholder="Your Interest"
+                  // defaultValue={className}
+                  onChange={(e) => {updateClassName(e.target.value)}}
+                />
+                <input
+                  className="myschedule-modal-input"
+                  type="text"
+                  placeholder="Details"
+                  // defaultValue={details}
+                  onChange={(e) => {updateDetails(e.target.value)}}
+                />
+                {/* ADD BUTTON */}
+                <button
+                  className="btn-add"
+                  onClick={createNote}
+                >
+                  ADD YOUR INTEREST
+                </button>
+              </Box>
+            </Modal>
+  
+            <Modal
+              m="1% 6% 0 6%"
+              open={openModal2}
+              onClose={closeModal2}
+            >
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: 400,
+                  height: "auto",
+                  backgroundColor: "#DDDDDD",
+                  boxShadow: 24,
+                  borderRadius: "10px",
+                  p: 4,
+                }}
+              >
+                {notes.notes.map((note) => (
+                  <Box margin="15px 0">
+                    <Typography>{note.className}</Typography>
+                    <Typography>{note.details}</Typography>
+                  </Box>
+                ))}
+              </Box>
+            </Modal>
+          </div>
         </div>
-      </div>
-
-      <Portfolio />
-    </>
-  );
+  
+        <Portfolio />
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div className="Intro" id="Intro">
+          <div className="i-left">
+            <div className="i-name">
+              <span style={{ color: darkMode ? "white" : "" }}>
+                Today's Popup
+              </span>
+            </div>
+            <div className="modals">
+              <button onClick={() => {setOpenModal(true)}} className="button i-button">
+                Review
+              </button>
+              <button className="button i-button">
+                My notes
+              </button>
+              <a
+                href="https://forms.gle/8byKgwRBMM8oaKdGA"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <button className="button i-button">Find interests</button>
+              </a>
+            </div>
+  
+            <Modal
+              m="1% 6% 0 6%"
+              open={openModal}
+              onClose={closeModal}
+            >
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: 400,
+                  height: "auto",
+                  backgroundColor: "#DDDDDD",
+                  boxShadow: 24,
+                  borderRadius: "10px",
+                  p: 4,
+                }}
+              >
+                <input
+                  className="myschedule-modal-input"
+                  type="text"
+                  placeholder="Your Interest"
+                  // defaultValue={className}
+                  onChange={(e) => {updateClassName(e.target.value)}}
+                />
+                <input
+                  className="myschedule-modal-input"
+                  type="text"
+                  placeholder="Details"
+                  // defaultValue={details}
+                  onChange={(e) => {updateDetails(e.target.value)}}
+                />
+                
+  
+                {/* ADD BUTTON */}
+                <button
+                  className="btn-add"
+                  onClick={createNote}
+                >
+                  ADD YOUR INTEREST
+                </button>
+              </Box>
+            </Modal>
+          </div>
+        </div>
+  
+        <Portfolio />
+      </>
+    );
+  }
 };
 
 export default Intro;

@@ -18,28 +18,42 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   wrapAsync(async function (req, res) {
     console.log("getting notes of", req.user, req.user._id);
+    const notes = []
     const user = await User.findById(req.user._id);
     const classes = user.classes;
-    res.json({ notes: classes });
-  })
-);
-router.get(
-  "/getNoteById/:id",
-  // passport.authenticate("jwt", { session: false }),
-  wrapAsync(async function (req, res) {
-    try {
-      const noteId = req.params.id;
-      const note = await Note.findById(noteId);
-      if (!note) {
-        return res.status(404).json({ message: "note not found" });
+    for (let i = 0; i < classes.length; i++) {
+      try {
+        const noteId = classes[i];
+        const note = await Note.findById(noteId);
+        if (!note) {
+          return res.status(404).json({ message: "note not found" });
+        }
+        notes.push(note)
+      } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Server Error" });
       }
-      res.json(note);
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ message: "Server Error" });
     }
+    res.json({ notes: notes });
   })
 );
+// router.get(
+//   "/getNoteById/:id",
+//   // passport.authenticate("jwt", { session: false }),
+//   wrapAsync(async function (req, res) {
+//     try {
+//       const noteId = req.params.id;
+//       const note = await Note.findById(noteId);
+//       if (!note) {
+//         return res.status(404).json({ message: "note not found" });
+//       }
+//       res.json(note);
+//     } catch (error) {
+//       console.log(error);
+//       return res.status(500).json({ message: "Server Error" });
+//     }
+//   })
+// );
 
 router.post(
   "/postNotes",
