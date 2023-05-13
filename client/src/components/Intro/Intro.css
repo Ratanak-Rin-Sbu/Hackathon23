@@ -7,7 +7,9 @@
   font-family: "Rubik", sans-serif;
   /* height: 100vh; */
 }
-
+div {
+  font-family: "Rubik", sans-serif;
+}
 /* left side styling */
 .i-left {
   display: flex;
