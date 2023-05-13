@@ -12,6 +12,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "state";
+import Cookies from "js-cookie";
 
 const registerSchema = yup.object().shape({
   name: yup.string().required("required"),
@@ -68,20 +69,26 @@ const Form = () => {
     if (savedUser) {
       setPageType("login");
     } else {
-      console.log("not working")
+      console.log("not working");
     }
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("http://localhost:4000/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    });
+    const loggedInResponse = await fetch(
+      "http://localhost:4000/api/auth/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      }
+    );
+    // const { token } = await loggedInResponse.json();
+
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
     console.log(loggedIn);
     if (loggedIn) {
+      // Cookies.set("token", token);
       dispatch(
         setLogin({
           user: loggedIn.user,
@@ -91,7 +98,7 @@ const Form = () => {
       navigate("/home");
       setIsInvalidInput(false);
     } else {
-      setIsInvalidInput(true)
+      setIsInvalidInput(true);
     }
   };
 
@@ -127,54 +134,48 @@ const Form = () => {
           >
             {isRegister ? (
               <>
-              <TextField
-                label="Name"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.name}
-                name="name"
-                error={
-                  Boolean(touched.name) && Boolean(errors.name)
-                }
-                helperText={touched.name && errors.name}
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                label="Email"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.email}
-                name="email"
-                error={
-                  Boolean(touched.email) && Boolean(errors.email)
-                }
-                helperText={touched.email && errors.email}
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                label="Password"
-                type="password"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.password}
-                name="password"
-                error={Boolean(touched.password) && Boolean(errors.password)}
-                helperText={touched.password && errors.password}
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                label="Gender"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.gender}
-                name="gender"
-                error={
-                  Boolean(touched.gender) && Boolean(errors.gender)
-                }
-                helperText={touched.gender && errors.gender}
-                sx={{ gridColumn: "span 4" }}
-              />
-            </>
+                <TextField
+                  label="Name"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.name}
+                  name="name"
+                  error={Boolean(touched.name) && Boolean(errors.name)}
+                  helperText={touched.name && errors.name}
+                  sx={{ gridColumn: "span 4" }}
+                />
+                <TextField
+                  label="Email"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.email}
+                  name="email"
+                  error={Boolean(touched.email) && Boolean(errors.email)}
+                  helperText={touched.email && errors.email}
+                  sx={{ gridColumn: "span 4" }}
+                />
+                <TextField
+                  label="Password"
+                  type="password"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.password}
+                  name="password"
+                  error={Boolean(touched.password) && Boolean(errors.password)}
+                  helperText={touched.password && errors.password}
+                  sx={{ gridColumn: "span 4" }}
+                />
+                <TextField
+                  label="Gender"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.gender}
+                  name="gender"
+                  error={Boolean(touched.gender) && Boolean(errors.gender)}
+                  helperText={touched.gender && errors.gender}
+                  sx={{ gridColumn: "span 4" }}
+                />
+              </>
             ) : (
               <>
                 <TextField
@@ -203,7 +204,12 @@ const Form = () => {
           </Box>
 
           {isInvalidInput && (
-            <Typography color="red" fontStyle="italic" marginTop="20px" marginLeft="10px">
+            <Typography
+              color="red"
+              fontStyle="italic"
+              marginTop="20px"
+              marginLeft="10px"
+            >
               Invalid credentials
             </Typography>
           )}

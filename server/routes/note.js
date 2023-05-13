@@ -20,11 +20,29 @@ router.get(
     console.log("getting notes of", req.user, req.user._id);
     const user = await User.findById(req.user._id);
     const classes = user.classes;
-    console.log(classes);
-    res.send({ classes });
+    res.json({ notes: classes });
+  })
+);
+router.get(
+  "/getNoteById/:id",
+  passport.authenticate("jwt", { session: false }),
+  wrapAsync(async function (req, res) {
+    console.log("getting notes of", req.user, req.user._id);
+    const user = await User.findById(req.user._id);
+    const classes = user.classes;
+    res.json({ notes: classes });
   })
 );
 
+// router.delete(
+//   "/delete/:id",
+//   passport.authenticate("jwt", { session: false }),
+//   async (req, res) => {
+//     const _id = req.params.id;
+//     await Transaction.findOneAndDelete({ _id: _id });
+//     res.json({ message: "Successfully deleted from DB" });
+//   }
+// );
 router.post(
   "/postNotes",
   passport.authenticate("jwt", { session: false }),
