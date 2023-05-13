@@ -126,7 +126,7 @@ const Intro = () => {
                 Today's Popup:
               </span>
               <span style={{ color: darkMode ? "white" : "", fontSize: "50px" }}>
-                Snake Charming
+                Political Debate
               </span>
             </div>
             <div className="modals">
