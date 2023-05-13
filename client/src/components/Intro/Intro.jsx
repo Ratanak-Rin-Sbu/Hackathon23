@@ -14,6 +14,8 @@ import { themeContext } from "../../Context";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Portfolio from "components/Portfolio/Portfolio";
+import { Typography, Modal, Box } from "@mui/material";
+import FlexBetween from "components/FlexBetween";
 
 
 const Intro = () => {
@@ -63,6 +65,42 @@ const Intro = () => {
     console.log(feedback);
   }
 
+  const [openModal, setOpenModal] = useState(false);
+  const [className, setClassName] = useState("");
+  const [interest, setInterest] = useState("");
+
+  const updateClassName = (e) => {
+    setClassName(e);
+  }
+
+  const updateInterest = (e) => {
+    setInterest(e);
+  }
+
+  const closeModal = () => {
+    setOpenModal(false);
+  }
+
+  // const createNote = async () => {
+  //   await fetch('http://localhost:4000/api/note/postNotes', {
+  //     headers: {
+  //       'Content-Type': 'application/json; charset=UTF-8'
+  //     },
+  //     method: 'PUT',
+  //     body: JSON.stringify({
+  //       name: name,
+  //       place: location,
+  //       color: color,
+  //       start: startTime,
+  //       end: endTime,
+  //       days: days
+  //     })
+  //   }).then((response) => {
+  //     console.log('event updated');
+  //   });
+  //   setOpenModal(false);
+  // };
+
   return (
     <>
       <div className="Intro" id="Intro">
@@ -74,7 +112,7 @@ const Intro = () => {
             <button className="button i-button">Review</button>
           </Link> */}
           <div className="modals">
-            <button onClick={toggleModal} className="button i-button">
+            <button onClick={() => {setOpenModal(true)}} className="button i-button">
               Review
             </button>
             <button onClick={toggleModal2} className="button i-button">
@@ -85,8 +123,54 @@ const Intro = () => {
             </a>
           </div>
 
+          <Modal
+            m="1% 6% 0 6%"
+            open={openModal}
+            onClose={closeModal}
+          >
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: 400,
+                height: "auto",
+                backgroundColor: "#DDDDDD",
+                boxShadow: 24,
+                borderRadius: "10px",
+                p: 4,
+              }}
+            >
+              <input
+                className="myschedule-modal-input"
+                type="text"
+                placeholder="Your Interest"
+                defaultValue={className}
+                // onChange={event => setName(event.target.value)}
+                onChange={(e) => {updateClassName(e.target.value)}}
+              />
+              <input
+                className="myschedule-modal-input"
+                type="text"
+                placeholder="Details"
+                defaultValue={interest}
+                // onChange={event => setName(event.target.value)}
+                onChange={(e) => {updateInterest(e.target.value)}}
+              />
+              
 
-          {modal && (
+              {/* ADD BUTTON */}
+              <button
+                className="btn-add"
+                // onClick={updateEvent}
+              >
+                ADD YOUR INTEREST
+              </button>
+            </Box>
+          </Modal>
+          
+          {/* {modal && (
             <div className="modal">
               <div onClick={toggleModal} className="overlay"></div>
               <div className="modal-content">
@@ -107,7 +191,7 @@ const Intro = () => {
                 </form>
               </div>
             </div>
-          )}
+          )} */}
 
           {modal2 && (
             <div className="modal">

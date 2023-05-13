@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
 .Intro {
   display: flex;
   display: center;
   align-items: center;
+  font-family: "Rubik", sans-serif;
   /* height: 100vh; */
 }
 
@@ -11,10 +14,12 @@
   position: relative;
   flex-direction: column;
   gap: 4rem;
+  font-family: "Rubik", sans-serif;
   /* height: 100vh; */
 }
 
 .i-name {
+  font-family: "Rubik", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,18 +29,21 @@
 }
 
 .i-name> :nth-child(1) {
+  font-family: "Rubik", sans-serif;
   color: var(--black);
   font-weight: bold;
   font-size: 3rem;
 }
 
 .i-name> :nth-child(2) {
+  font-family: "Rubik", sans-serif;
   color: var(--orange);
   font-weight: bold;
   font-size: 3rem;
 }
 
 .i-name> :nth-child(3) {
+  font-family: "Rubik", sans-serif;
   font-weight: 100;
   font-size: 14px;
   color: var(--gray);
@@ -43,30 +51,36 @@
 }
 
 .i-button {
+  font-family: "Rubik", sans-serif;
   width: 6rem;
   height: 2rem;
   margin-right: 10px;
 }
 
 .i-button:last-child {
+  font-family: "Rubik", sans-serif;
   width: 8rem;
 }
 
 .i-icons {
+  font-family: "Rubik", sans-serif;
   margin-top: 15rem;
   display: flex;
   gap: 0rem;
 }
 
 .i-icons>* {
+  font-family: "Rubik", sans-serif;
   transform: scale(0.5);
 }
 
 .i-icons>*:hover {
+  font-family: "Rubik", sans-serif;
   cursor: pointer;
 }
 
 .btn-modal {
+  font-family: "Rubik", sans-serif;
   padding: 10px 20px;
   display: block;
   margin: 100px auto 0;
@@ -75,6 +89,7 @@
 
 .modal,
 .overlay {
+  font-family: "Rubik", sans-serif;
   width: 100vw;
   height: 120vh;
   top: 0;
@@ -89,6 +104,7 @@
 }
 
 .modal-content {
+  font-family: "Rubik", sans-serif;
   position: absolute;
   top: 40%;
   left: 50%;
@@ -191,6 +207,67 @@
   top: -18%;
   left: 56%;
   filter: blur(72px);
+}
+
+.myschedule-modal-input {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid gray;
+  outline: 0;
+  font-size: 1rem;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+  margin-bottom: 15px;
+  font-family: "Rubik", sans-serif;
+}
+
+button {
+  margin-top: 10px;
+  width: auto;
+  appearance: none;
+  background-color: #2ea44f;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+button:hover {
+  /* color: whitesmoke; */
+  background-color: #2c974b;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+
+button:active {
+  background-color: #298e46;
+  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+  -webkit-transform: translate(5px, 5px);
+  transform: translate(5px, 5px);
+}
+
+button:focus {
+  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  outline: none
+}
+
+button:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none
 }
 
 @media screen and (max-width: 480px) {
