@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Intro.css";
 import Vector1 from "../../img/Vector1.png";
 import Vector2 from "../../img/Vector2.png";
@@ -16,8 +16,52 @@ import { useNavigate } from "react-router-dom";
 import Portfolio from "components/Portfolio/Portfolio";
 import { Typography, Modal, Box } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
+import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
 
 const Intro = () => {
+  const [classes, setClasses] = useState([]);
+  const token = useSelector((state) => state.token);
+  useEffect(() => {
+    fetchNotes();
+  }, []);
+  useEffect(() => {
+    console.log(classes);
+  }, [classes]);
+  const fetchNotes = async () => {
+    const res = await fetch(`/api/note/getNotes`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      credentials: "include",
+      method: "GET",
+    });
+    const notes = await res.json();
+    setClasses(notes);
+  };
+  const renderNotes = () => {
+    return classes.map(async (noteId) => {
+      const token = Cookies.get("token");
+      const res = await fetch(`/api/note/getNote/${noteId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "include",
+          Authorization: `Bearer ${token}`,
+        },
+        method: "GET",
+      });
+      const note = await res.json();
+
+      return (
+        <div key={note._id}>
+          <h3>{note.details}</h3>
+          <p>{note.createdDate}</p>
+        </div>
+      );
+    });
+  };
+
   // Transition
   const transition = { duration: 2, type: "spring" };
 
@@ -27,7 +71,6 @@ const Intro = () => {
 
   const [modal, setModal] = useState(false);
   const [lesson, setLesson] = useState("");
-  const [classes, setClasses] = useState([]);
   const [feedback, setFeedback] = useState("");
   const [modal2, setModel2] = useState(false);
   const [date, setDate] = useState(new Date());
