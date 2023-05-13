@@ -21,6 +21,7 @@ import { useSelector } from "react-redux";
 import Lottie from "react-lottie";
 import animationData from "../main3d.json";
 import starData from "../star3d.json";
+import { BorderColor } from "@mui/icons-material";
 
 const Intro = () => {
   const defaultOptions1 = {
@@ -103,7 +104,7 @@ const Intro = () => {
   // };
 
   // Transition
-  const transition = { duration: 2, type: "spring" };
+  const transition = { duration: 4, type: "spring" };
 
   // context
   const theme = useContext(themeContext);
@@ -160,8 +161,11 @@ const Intro = () => {
         <div className="Intro" id="Intro">
           <div className="i-left">
             <div className="i-name">
-              <span style={{ color: darkMode ? "white" : "" }}>
-                Today's Popup
+              <span style={{ color: darkMode ? "white" : "", fontSize: "20px" }}>
+                Today's Popup:
+              </span>
+              <span style={{ color: darkMode ? "white" : "", fontSize: "50px" }}>
+                Snake Charming
               </span>
             </div>
             <div className="modals">
@@ -237,18 +241,22 @@ const Intro = () => {
                   top: "50%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
-                  width: 400,
-                  height: "auto",
-                  backgroundColor: "#DDDDDD",
+                  width: "60%",
+                  /* height: "auto", */
+                  height: "90%",
+                  /* backgroundColor: "#DDDDDD", */
+                  backgroundColor: "white",
                   boxShadow: 24,
                   borderRadius: "10px",
                   p: 4,
                 }}
               >
                 {notes.notes.map((note) => (
-                  <Box margin="15px 0">
-                    <Typography>{note.className}</Typography>
-                    <Typography>{note.details}</Typography>
+                  <Box sx={{ border: 2, borderColor: '#ffa41c', borderRadius: "15px" }} margin="15px 0" >
+                    <Box margin="10px">
+                      <Typography>Interest: {note.className}</Typography>
+                      <Typography>Feedback: {note.details}</Typography>
+                    </Box>
                   </Box>
                 ))}
               </Box>
@@ -261,11 +269,10 @@ const Intro = () => {
             />
             <Lottie options={defaultOptions1} />
           </div>
-          <div>
-            Visit popups and earn your
-            stars.kfkfkfkfkfkfkfllflalflalllalalalalalalalalallaallala
+          <div className="slogan">
+            Popup to learn– today.
           </div>
-        </div>
+        </div >
 
         <Portfolio />
       </>

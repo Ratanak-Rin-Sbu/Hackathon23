@@ -7,15 +7,17 @@
   font-family: "Rubik", sans-serif;
   /* height: 100vh; */
 }
+
 div {
   font-family: "Rubik", sans-serif;
 }
+
 /* left side styling */
 .i-left {
   display: flex;
   position: relative;
   flex-direction: column;
-  gap: 4rem;
+  gap: 2rem;
   font-family: "Rubik", sans-serif;
   /* height: 100vh; */
 }
@@ -27,24 +29,25 @@ div {
   align-items: center;
   gap: 0.25rem;
   font-family: "Rubik", sans-serif;
+  flex-direction: column;
   /* margin-bottom: 30px; */
 }
 
-.i-name > :nth-child(1) {
+.i-name> :nth-child(1) {
   font-family: "Rubik", sans-serif;
   color: var(--black);
   font-weight: bold;
   font-size: 3rem;
 }
 
-.i-name > :nth-child(2) {
+.i-name> :nth-child(2) {
   font-family: "Rubik", sans-serif;
   color: var(--orange);
   font-weight: bold;
   font-size: 3rem;
 }
 
-.i-name > :nth-child(3) {
+.i-name> :nth-child(3) {
   font-family: "Rubik", sans-serif;
   font-weight: 100;
   font-size: 14px;
@@ -71,12 +74,12 @@ div {
   gap: 0rem;
 }
 
-.i-icons > * {
+.i-icons>* {
   font-family: "Rubik", sans-serif;
   transform: scale(0.5);
 }
 
-.i-icons > *:hover {
+.i-icons>*:hover {
   font-family: "Rubik", sans-serif;
   cursor: pointer;
 }
@@ -167,6 +170,13 @@ div {
 /* right side styling */
 .i-right {
   flex: 1;
+}
+
+.slogan {
+  margin-left: 50px;
+  font-size: 30px;
+  font-weight: 700;
+  text-decoration: underline;
 }
 
 /* .i-right > * {

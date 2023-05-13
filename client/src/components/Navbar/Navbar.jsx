@@ -8,7 +8,7 @@ import { setLogout } from "state";
 const Navbar = () => {
   const dispatch = useDispatch();
   const [button1Text, setButton1Text] = useState("Are you a Provider?");
-  const [button2Text, setButton2Text] = useState("Button");
+  const [button2Text, setButton2Text] = useState("Logout?");
 
   return (
     <div className="n-wrapper" id="Navbar">
